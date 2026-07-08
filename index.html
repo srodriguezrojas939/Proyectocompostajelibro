@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=yes,minimal-ui">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<title>Libro digital interactivo</title>
+
+	<!-- configuración del libro -->
+	<script>
+	window.book_config = {
+    // parámetro que indica si los capítulos, secciones y figura se auto numeran
+    // para que los capítulos se auto numeren deben utilizar la etiqueta <h1>
+    // para que las secciones se auto numeren deben utilizar la etiqueta <h2>
+    auto_numerate_sections_and_figures: true, 
+	}
+	</script>
+
+	<!-- núcleo del libro interactivo, se sugiere no intervenir para evitar problemas con futuras actualizaciones -->
+	<link rel="stylesheet" href="book/css/style.css" type="text/css">
+	<script type="text/javascript" src="book/js/book.js" charset="utf-8"></script>
+  
+	<!-- personalización del usuario -->
+	<link rel="stylesheet" href="extra/fonts.css" type="text/css">
+	<link rel="stylesheet" href="extra/style.css" type="text/css">
+	<link rel="stylesheet" href="extra/mis_estilos.css" type="text/css">
+	
+	<!-- inclusión de la biblioteca KaTex, para los libros de matemáticas, física, etc. -->
+	<link rel="stylesheet" type="text/css" href="extra/katex/katex.min.css"/>
+	<script src="extra/katex/katex.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="extra/katex/copy-tex.min.css"/>
+	<script src="extra/katex/copy-tex.min.js"></script>
+	<script src="extra/katex/auto-render.min.js" ></script>
+
+	<!-- Opcional en caso de requerir formulas químicas -->
+	<script src="extra/katex/mhchem.min.js"></script>
+  
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		renderMathInElement(document.body, {
+		delimiters: [ {left: "$$", right: "$$", display: true}, {left: "$", right: "$", display: false}, {left: "\\[", right: "\\]", display: true}, {left: "\\(", right: "\\)", display: false} ]
+		});
+		});
+	</script>
+</head>
+
+<body>
+	<div id="book_loader_container"><div id="book_loader"></div></div>
+
+	<div id="book_container">
+    <div id="btn_back_page"></div>
+    <div id="btn_next_page"></div>
+    <button id="go_to_table_of_content"></button>
+    
+    <button id="btn_config"></button>
+    <div id="config_options">
+		<div id="dark_light_mode"></div>
+		<!-- Botón para la herramienta calculadora
+		<div style="text-align:center;">
+		<button id="tool_calculadora" 
+		onclick="openInteractive('./tools/calculadora78/index.html','380','648')">
+		</button> -->
+	</div>
+    </div>
+
+    <!-- si este elemento no esta presente, el botón de la tabla de contenido lleva a la primera página con un elemento class="toc_link" -->
+    <div id="table_of_content"></div>
+
+    <div id="pages_container">
+	
+    <!-- Página izquierda transparente, antes de la portada -->
+    <div class="page" style="background-color:transparent;">
+    </div>
+
+    <!-- Portada -->
+    <div class="page invertcolor" style="margin:0; padding:0; background-size:contain; background-image:url(images/general/portada.png);">
+		<div style="position:absolute; left:58px; width:532px; height:532px;  background-image:url('images/portadalibro.png'); background-size:582px 582px; background-position:0px 0px;"></div>
+		<div class="cover_title" style="font-size: 25px; margin-top:-10px;">  </div>
+    	<div class="cover_subtitle" style="position: absolute; top:550px;"> <b>Elaboración de compost en CANECAS GIRATORIAS </b> </div>
+		<div style="position: absolute; bottom: 95px; left:58px; width:582px; font-size:23px; color:#0089cd; text-align:center">
+		<p> Proyecto de apropiación social del conocimiento para la gestión ambiental comunitaria</div>
+		<p  align="center" style="position: absolute; bottom: 10px; left:58px; width:582px; text-align:center">
+			<a  target="_blank" href="https://proyectodescartes.org"> <img src="images/general/gifanimadoRedProyecto.gif" width="150px"/></a>
+		</p>
+    </div>
+
+    <!--  -->
+    <div class="page" style="display:flex; align-items:center; justify-content:center;">
+		<a style="width:50%" target="_blank" href="https://proyectodescartes.org/iCartesiLibri/index.htm"><img src="images/general/icartesilibri_logo.svg" width="100%"></a>
+    </div>
+
+    <!--  -->
+
+    <!-- La editorial es opcional -->
+    <div class="page" style="text-align:center; font-size:120%;" init-page-num="true" num="">
+        <h1> Elaboración de compost en CANECAS GIRATORIAS</h1>
+		<p style="margin-top: 200px;"><b>Proyecto de apropiación social del conocimiento para la gestión ambiental comunitaria</b> <br>Institución Universitaria Pascual Bravo<br>
+		<a  target="_blank" href="https://pascualbravo.edu.co/">
+			<img src="images/general/logo_pascual_bravo.svg" width="90px"/></a></p>
+		<p align="center" style="position: absolute; bottom: 105px; left:0; right:0;">
+		Fondo Editorial RED Descartes<br><br>
+		<a  target="_blank" href="https://proyectodescartes.org">
+		<img src="images/general/logo_descartes3.png" width="300px"/></a></p>
+		<p align="center" style="position: absolute; bottom: 50px; left:0; right:0;">Córdoba (España)<br/>2026</p>
+    </div>
+
+      <!--  -->
+      <div class="page" num="">
+        <p>
+          Título de la obra:
+          <br> 
+          <b>Elaboración de compost en CANECAS GIRATORIAS </b>
+        </p>
+      
+
+       
+          Autores:
+          <p> Diego Sanchez Osorno </p>
+		  <p> Willian Vallejo Quintero 
+		   <p>Sergio Ruíz Obando </p>
+		   <p>Javier Mejía Sierra </p>
+		   <p> Sebastian Rodriguez Rojas </p>
+		   <p> Susana Pérez </p>
+		   <p> Yezid Gallego Oviedo </p> 
+		  <br></br>
+		  Revisión y edición:<br>
+		  Juan Guillermo Rivera Berrío
+        </p>
+        
+
+        <p>
+          Código JavaScript para el libro: <a href="https://github.com/jlongi/libro_interactivo" target="_blank">Joel Espinosa Longi</a>, <a href="https://www.matem.unam.mx/" target="_blank">IMATE</a>, UNAM.
+          <br> 
+          Recursos interactivos: <a href="http://descartes.matem.unam.mx/" target="_blank">DescartesJS</a>
+          <br> 
+          Fuentes: <a href="https://fonts.google.com/specimen/Lato" target="_blank">Lato</a> y <a href="https://fonts.google.com/specimen/Ubuntu+Mono" target="_blank">UbuntuMono</a>
+        </p>
+    
+
+      
+		Red Educativa Digital Descartes<br>
+			Córdoba (España)
+			<br>
+			<a href="mailto:descartes@proyectodescartes.org?Subject=Fondo editorial">
+			descartes@proyectodescartes.org</a><br>
+			
+			<a href="https://proyectodescartes.org/descartescms/" target="_blank">https://proyectodescartes.org</a><br><br>
+			Proyecto iCartesiLibri<br>
+			<a href="https://proyectodescartes.org/iCartesiLibri/index.htm" target="_blank">https://proyectodescartes.org/iCartesiLibri/index.htm</a>
+			
+			<br><br>
+			ISBN: <br>
+
+			</p>
+			<p style="font-size:10px; position: absolute; bottom: 30px; left: 50px; right:0;"><a href="http://creativecommons.org/licenses/by-nc-sa/4.0" target="_blank"><img src="images/general/88x31.png" style="height:36px; width:99px" /></a><br>Esta obra está bajo una licencia Creative Commons 4.0 internacional: Reconocimiento-No Comercial-Compartir Igual.</p>
+      </div>
+
+      <!--  -->
+      <div class="page">
+        <h2>Tabla de contenido</h2>
+		<div class="toc_link" href="#prefacio"></div>
+		<div class="toc_link" href="#capitulo_1"></div>
+		<div class="toc_link" href="#c11"></div>
+		<div class="toc_link" href="#c12"></div>
+		<div class="toc_link" href="#c13"></div>	   
+		<div class="toc_link" href="#c14"></div>		  
+		<div class="toc_link" href="#c15"></div>
+		<div class="toc_link" href="#c16"></div>	   
+		<div class="toc_link" href="#c17"></div>		  
+		<div class="toc_link" href="#c18"></div>
+		<div class="toc_link" href="#c19"></div>
+		<div class="toc_link" href="#c110"></div>
+		<div class="toc_link" href="#c111"></div>
+		<div class="toc_link" href="#c112"></div>
+		<div class="toc_link" href="#c113"></div>
+		<div class="toc_link" href="#c114"></div>
+		<div class="toc_link" href="#c115"></div>
+		<div class="toc_link" href="#c116"></div>
+		</div>
+		
+		<!--  -->
+      <div class="page">
+	  </div>
+
+      <!--  -->
+      <!-- num-type-arabic="true" es un parámetro que indica que a partir de esta página la numeración utilizara numerales arábigos -->
+      <!--  -->
+      <div class="page" num-type-arabic="true" style="font-size:99%">
+        <h1 id="prefacio">Presentación</h1>
+		<p style="text-align: right; margin-left:160px; font-size:17px;"><span style="color:var(--h1-color);"> "Hacer compost es lo más parecido a hacer magia". </span><br>  Anónimo</p>
+        <p> Se presenta la propuesta de elaboración de COMPOST en CANECAS GIRATORIAS, como una alternativa para facilitar el proceso, para hacerlo más sencillo, más cómodo, más práctico, más rápido y más rentable, en comparación con los modelos tradicionales.</p> 
+		<p> Un modelo que supera la incomodidad visual por la acumulación de residuos de los otros métodos de compostaje, de fácil manejo, de mejor control de las variables que afectan la calidad del compost, sin mayores esfuerzos físicos y sin los riesgos de contaminación por insectos y roedores. </p>  
+		<p> Se propone generar conciencia ecológica y aportar a las alternativas de soluciones para superar los altos niveles de contaminación ambiental, ocasionados por los problemas de la deficiente disposición final de los residuos orgánicos, producidos en la elaboración de alimentos y los residuos de la comercialización de frutas y legumbres en diferentes grupos comunitarios.</p> 
+		<p> Los residuos orgánicos en las ciudades representan casi un 50 % del volumen de residuos que se llevan a los mal llamados “rellenos sanitarios”, generando fuera de los costos de transporte, contaminación por los lixiviados generados y esparcidos durante el viaje; además, en su mayoría estos “rellenos sanitarios”se encuentran en sus etapas finales de saturación; con el agravante que ningún municipio quiere albergar este tipo de basureros. </p>
+		<p> Se requiere la integración de esfuerzos individuales y colectivos, para disminuir estos efectos negativos, en la preservación del medio ambiente y para implementar las políticas administrativas de manejo, de distribución y si es el caso, la comercialización del abono producido. </p>
+		</div>
+	  
+	<!-- 6 -->
+	<div class="page">
+		<p> La elaboración de compost para aprovechar los residuos orgánicos, implica la articulación de sencillas acciones: inicia con la separación de los residuos orgánicos desde la fuente, se sugiere acumularlos en un tarro o en una bolsa, ojalá picados para optimizar el proceso de descomposición, se depositan en la caneca giratoria y se le da un giro. En este documento se detallan los aspectos más relevantes del proceso de compostaje en pequeña escala,en instituciones educativas, unidades residenciales y diferentes grupos comunitarios.</p>
+		<p> Existen varios proyectos exitosos del sector empresarial que producen abonos orgánicos a partir del reciclaje de residuos orgánicos; igualmente, por iniciativa de las alcaldías en varias ciudades de Colombia se han implementado planes de manejo de los residuos orgánicos; esfuerzos que requieren ser ampliados en su cobertura y ser articulados para generar una nueva cultura, tanto a nivel doméstico, como empresarial. </p>
+		<p> El mejor complemento a la elaboración de compost es el montaje del <b> lombricultivo </b>(con lombrices rojas californianas), explotación comercialmente sostenible, por su rentabilidad y alta productividad; entre otras por las siguientes razones: la longevidad, prolificidad y productividad de las lombrices, la cantidad y calidad del humus de lombriz producida, la variedad y rentabilidad de los subproductos (lixiviado, harina de carne de lombriz y el propio pie de cría). </p> 
+		<p> Además, es altamente productivo por los beneficios que genera en el mejoramiento de las condiciones biológicas, físicas y químicas del suelo, lo cual <b>potencializa </b>la absorción de los nutrientes que las plantas requieren para su desarrollo; con otra ventaja, éstas condiciones se mantienen por más largo plazo, contrario al efecto residual de contaminación y degradación del suelo que ocasionan los abonos de síntesis química. Sustituir su uso, es una necesidad para mejorar la salud humana y de los animales domésticos; <code> <b> "comer sano", "comer orgánico" es la propuesta.</b> </code> </p>
+		</div>
+	
+    <!-- 7 -->
+     <div class="page">
+	<p> Así como en la elaboración de compost hay diferentes sistemas, explotar un lombricultivo tembién se puede hacer gradualmente y en varios sistemas, según la disponibilidad de recursos. </p>
+	<p> En otro proyecto se detallarán los procesos, métodologías, resultados y ventajas del lombricultivo.</p> 
+	<p class="caja1" style="width:70%;">“Datos para ilustrar la dimensión del proyecto:  <br> </br> Independiente de las ventajas y bondades de sustituir los abonos de síntesis química por abonos orgánicos para la salud humana y de los suelos, <b>el reciclaje de los residuos orgánicos es una actividad  rentable. </b> <br> </br>	1 kilogramo de humus de lombriz se vende en el<b> triple del valor de 1 kilogramo de compost </b> y 1 litro del lixiviado de humus de lombriz cuesta <b> 10 veces más. </b> <br> </br>Ponderando valores según volumen, empaque y marca del productor  </p>
+	</div>	  
+	  
+     <!-- 8 -->
+      <div class="page invertcolor"  style="background-image: url('images/como-hacer-compost-ecolover-1.JPEG'); background-size:600px 900px; background-position:0px -50px; background-repeat: no-repeat;" num="">
+	  
+	  </div>
+
+      <!-- 9 -->
+      <div class="page" num="" style="margin:0; padding:0; background-size:contain; background-image:url(images/general/portada_capitulos.svg);">
+        <div class="chap_text">Capítulo I</div>
+        <h1 class="chap_name" id="capitulo_1"> Generalidades del compostaje</h1>
+      </div>	  
+	  
+      <!-- 10 -->
+      <div class="page" style="background-image: url('images/i1.png'); background-size:500px 413px; background-position:390px 412px; background-repeat: no-repeat;">
+	  <div class="col_izquierda">
+	   <h2 id="c11" style="text-align: left">¿Qué es el compostaje?</h2>
+	  <p> Proviene de la raíz latina <code>composta</code> que quiere decir <code>compuesto</code> o <code>poner junto</code>: juntar varios materiales vegetales entre los cuales se desencadenan procesos de fermentación y descomposición aeróbica y anaeróbica natural, que libera nutrientes benéficos para el suelo, el resultado final es un material que sirve como abono para mejorar la fertilidad de los suelos.</p>
+	  <p> Se simula el proceso natural que ocurre cuando se acumulan las ramas y hojas que caen de los árboles, bajo ciertas condiciones de humedad.  </p>
+	  <p style="text-align-last:justify"> El compost es un abono orgánico de alta calidad y bajo costo, que aporta al suelo los nutrientes <code>solubles</code> para ser absorbidos por las plantas, es el producto de la acción de los microorganismos que descompone y degrada la materia orgánica, en un proceso aerobio (presencia de oxígeno) regulado por adecuados niveles de aireación y humedad; los </p> 
+	  </div>
+	 <div class="col_derecha">
+	 <p> cuales determinan la <code>temperatura</code> (según la etapa del proceso), el <code>pH</code>, la <code>ausencia de malos olores</code>, la <code>calidad</code> del compost y el <code>tiempo</code> de duración del proceso. </p>
+	 <p> El compostaje es el <code>reciclaje de la naturaleza</code>. Es lo que <code>ocurre en los ecosistemas naturalmente</code>, en un ciclo cerrado y dinámico que se auto-regula; es el proceso en el cual los residuos orgánicos son degradados biológicamente y luego transformados, primero, en sustancias orgánicas, en lo que conocemos como <code>humus</code>, y luego en sustancias minerales (disueltos en <code>sales inorgánicas</code>), sustancias que las plantas toman directamente del suelo, para su nutrición y ciclos vitales de crecimiento y reproducción. </p>
+	 </div>
+	  </div>
+
+	<!-- 11 -->
+    <div class="page" style="background-image: url('images/i1.png'); background-size:500px 413px; background-position:-250px 412px; background-repeat: no-repeat;">
+	<div class="col_izquierda">
+		<h2 id="c12" style="text-align: left">Historia del compostaje</h2>
+		La elaboración de compost a partir de residuos orgánicos es una práctica tradicional desde hace muchos años; los chinos han recogido los materiales de desecho (podas) de los jardines de sus casas y de sus campos, mezclándolos con los excrementos de sus animales de pastoreo para hacer compost y aplicarlos en sus explotaciones agrícolas; en las ciudades más antiguas del mundo, como Damasco, Babilonia, Jerusalén,<br>
+		<p style="position:relative; left:33%; width:170px; text-align: right; margin-top: 0px;"> entre otras, disponían lugares especiales para la recolección de las basuras, con algunos residuos<br> hacían compost<br> y los otros los incineraban.</p> 
+		</div>
+		<div class="col_derecha">
+		<p> En Europa debido a la gran cantidad de basura que se acumulaba en las ciudades, se inició en el año 1925, el proceso de descomponerlas a gran escala, empleando <code> el método Indú-lndore; </code> nombre dado en honor al investigador Inglés Sir Albert Howard por sus estudios realizados en la India, <code>(Indore por el nombre de la granja experimental),</code> experimentos consistentes en mezclar restos vegetales con estiércol de los animales. </p>
+		<p> En Colombia de forma artesanal, algunos agricultores aprovechan los residuos de cosecha para transformarlos en abono orgánico; no es una práctica generalizada, a pesar de sus bondades, dado que debe planear con anticipación la producción del abono y su aplicación. </p> 
+		<p> Afortunadamente se ha incrementado el número de empresas que ofrecen el servicio de manejo integral de los residuos orgánicos, elaboran compost como fuente de alimento para producir y comercializar humus de lombriz y el lixiviado. </p>
+		</div>
+		</div>
+	 
+	<!-- 12 -->
+    <div class="page" style="background-image: url('images/i2.jpg'); background-size:1280px 825px; background-position:0px 0px; background-repeat: no-repeat; color:black">
+	<div class="col_izquierda">
+	<h2 id="c13" style="text-align: left"> Objetivos de realizar el compostaje</h2>
+	<ul>
+	<li> Aprovechar al máximo los residuos orgánicos para disminuir su traslado a los rellenos sanitarios.</li>
+	<li> Transformar los residuos orgánicos en abono orgánico, que mejoran la calidad de los suelos, pues, se incrementa la actividad de los microorganismos que “solubilizan” los nutrientes para las plantas, en sustitución de productos de síntesis química y a menores costos.</li>
+	<h2 id="c14" style="text-align: left"> <b>Ventajas de hacer y usar el compostaje</b> </h2>
+	<li>Se hace con desperdicios de cocina y residuos de cosecha, por lo que es más económico su proceso.</li>
+	<li>Contribuye a la preservación del entorno ambiental al utilizar los residuos orgánicos.</li>
+	</ul> 
+	</div>
+	</div>	
+  
+    <!-- 13 -->
+      <div class="page"  style="background-image: url('images/i2.jpg'); background-size:1280px 825px; background-position:-640px 0px; background-repeat: no-repeat; color:black;">
+		<li>Disminuye la utilización de fertilizantes de síntesis química que a mediano y largo plazo satura y degrada los suelos; además, contamina las aguas.</li>
+	<li> El compostaje es el mejor insumo (sustrato) para el lombricultivo.</li>
+	    <p> Con la elaboración de compost a partir de los residuos orgánicos se evita que se consideren como basura, se reducen sus volúmenes y por ende, se disminuyen los costos por traslados a los sitios de disposición final; o que se quemen, disminuyendo la generación de gases contaminantes, una de las causas principales del cambio climático.</p> 
+		<div class="caja3" style="margin-left: 190px;"> Existe variedad en los tipos de dispositivos para elaborar compost, según la disponibilidad de recursos, puede elaborarse a grandes volúmenes o en pequeña escala, en canecas giratorias u otro tipo de contenedores o en pilas en el suelo; con multitud de «ingredientes» o residuos, <b>siempre de origen biológico.</b> <br> </br> Igual ocurre con el lombricultivo, existen varios métodos de explotación, dependiendo del compost producido, del espacio, de los recursos y la disponibildad de tiempo para atender su agronegocio.</b> </div>
+		</div>
+    
+    <!-- 14 -->
+    <div class="page" style="background-image: url('images/i13.png'); background-size:640px 655px; background-position:0px 200px; background-repeat: no-repeat;">
+		<h2 id="c15" style="text-align: left"> <b>¿Por qué implementar el compostaje?</b> </h2> </p>
+		<p>El compost ayuda a mejorar las propiedades del suelo: <b>Propiedades físicas</b> (agregación, porosidad, retención de humedad), <b>Propiedades químicas</b>(pH, materia orgánica, nutrientes, solubilidad) y <b>Propiedades biológicas</b> (interacción con los microorganismos y los nutrientes), lo cual genera:</p>
+		<div class="col_izquierda" style="width:300px">
+		<ul class="lista2" style="margin-left: -45px; text-align: left; margin-top:170px;"><li>Incremento de la <b>Capacidad de Intercambio Catiónico CIC</b>. Un mayor contenido de materia orgánica facilita la retención de nutrientes, reduce la lixiviación o pérdida de éstos e incrementa la absorción de los minerales presentes.  
+		<li><b>Un mayor contenido de materia orgánica</b> mejora la estructura edáfica del suelo y la formación de agregados, que incrementan la aireación (mayor volumen de oxígeno) y la capacidad de regular los niveles de humedad.
+		<li><b>Convierte residuos</b> que pueden ser contaminantes en abono orgánico.</ul>
+		</div>
+	    </div>	
+	
+	<!-- 15 -->
+    <div class="page">	
+		<br><ul class="lista2"><li><b><img style="float: right; margin-left: 10px" src="images/i12.png" width="43%"/>Aporte de microorganismos benéficos</b> para las plantas, que degradan y descomponen la materia orgánica, actúan como fijadores del nitrógeno, solubilizan los nutrientes y antagonizan con otros microorganismos patógenos.
+		<li><b><img style="float: right; margin-left: 10px" src="images/i11.png" width="28%"/>Abono orgánico </b> que <code>mejora, enmienda y genera</code> las condiciones físico-químicas y biológicas, para que los nutrientes presentes en el suelo, sean <b>más solubles y más digestibles</b> para ser absorbidos por las plantas.  
+		<li><b>Aporte al suelo de los macro y micronutrientes </b> en las cantidades y proporciones que requieren las plantas, según su variedad.
+		</ul>
+		<figure>
+		<img class="image_expand" onclick="openImage(this)" src="images/No soy basura.jpg" width="100%">
+		<figcaption style="margin-top:5px"> No soy basura. </figcaption> </figure>
+		<p> Es una propuesta de <code> <b>" cambio de mentalidad",</code> </b> es reconocer que los <b> residuos orgánicos <code> NO SON BASURA y se deben COMPOSTAR.</code> </b>  </p>
+		</div>
+	
+	<!-- 16 -->
+    <div class="page">
+	<h2 id="c16" style="text-align: left"> <b>¿Modelo de caneca giratoria para elaborar compost.</b> </h2> </p>
+	<p> El Proyecto de apropiación social del conocimiento para la gestión ambiental comunitaria, propuesto en la Institución Universitaria Pascual Bravo de Medellín, plantea la<b> elaboración de compost a partir del reciclaje de residuos orgánicos, en un modelo de caneca giratoria,</b> para ser aplicado en diversas comunidades, como Instituciones Educativas, Conjuntos Residenciales, Acciones Comunales y otros grupos comunitarios. </p>
+	<figure>
+	<img class="image_expand" onclick="openImage(this)" src="images/Animacioncompostera.gif" width="75%">
+	<figcaption style="margin-top:5px">Animación caneca giratoria. </figcaption> </figure>
+    </div>
+
+	<!-- 17 -->
+    <div class="page">
+		<p> Este sistema de<b> caneca giratoria para elaborar compost </b> se calcula para volúmenes de entre 150 y 175 kilogramos de residuos orgánicos, calculado para un periodo de tiempo entre 6 y 8 semanas;  tiempo que se proyecta disminuir mediante la aplicación de aditivos que aceleran el proceso del compost. </p>
+
+	<p> <b>Plano del ensamblaje de la caneca giratoria </b> </p>
+	<figure>
+	<img class="image_expand" onclick="openImage(this)" src="images/EnsamblajeCompostera.PNG" width="70%">
+	<figcaption style="margin-top:5px">Plano del ensamblaje de la caneca giratoria. </figcaption> </figure>
+	</div>	
+
+<!-- 18 -->
+    <div class="page">
+		<img class="image_expand" onclick="openImage(this)" src="images/animacionexplode.gif" width="75%">
+	<figcaption style="margin-top:5px">Animación vista explosionada. </figcaption> </figure>
+	<p> En los casos de disponer de mayores volúmenes de residuos orgánicos se pueden agregar otras canecas, incluso se pueden conectar a una serie de mecanismos de tracción, para facilitar el giro de las canecas. La<b> caneca giratoria </b>tiene los siguientes acondicionamientos:</p>
+	<figure>
+    <p> •	Una ventana con seguro, para el ingreso de los residuos orgánicos y la extracción del compost elaborado.</p> 
+	<p> •	Dos medios tubos internos de pvc colocados a lo largo de la caneca. diametralmente opuestos y en forma biconvexa (para homogenizar la mezcla). </p>
+
+    </div>
+
+	<!-- 19 -->
+    <div class="page">
+
+	<figure>
+	<img class="image_expand" onclick="openImage(this)" src="images/tabladecomponentes.png" width="70%">
+	<figcaption style="margin-top:5px">Tabla de componentes de ensamble. </figcaption> </figure>
+	<p> •	Con este mismo objetivo, la instalación de 16 tornillos de 4 o 5 pulgadas de largo x 5/32 de pulgada de grueso, asegurados con tuerca y arandela, para contribuir a romper las superficies de los residuos al girar la caneca.</p>
+	<p> •	Un tubo de sujeción que atraviesa la caneca, soportadas en sendos rodachines para permitir el giro de la caneca, con un par de hélices en acero inoxidable (de 2 pulgadas de ancho) que facilita la homogenización de los residuos.</p>
+	
+</div>	
+
+	<!-- 20 -->
+    <div class="page">
+		<p> •	El tubo interno está soportado en una estructura, tipo H, ajustable que facilitan el giro de la caneca, con un trinquete para asegurar la posición de la caneca, a una altura que facilite el ingreso de los residuos y la extracción del compost elaborado.</p>
+	<p>	•	Maniguetas o pomos colocados simétricamente para facilitar el giro manual de la caneca.</p>
+	<p> •	Una llave plástica colocada en la base de la caneca, para la recolección del lixiviado.</p>
+	<p> •	De 12 a 16 agujeros de ¼ de pulgada para la aireación del compost, en las dos caras laterales de la caneca. </p>
+	<p> •	Sensor (Soil tester) portatil para monitoreo de ocho (8) parametros 
+		
+		<table 
+  <tr>
+    <td>Temperatura</td>
+    <td>Humedad</td>
+    <td>EC (Conductividad)</td>
+    <td>pH </td>
+  </tr>
+  <tr>
+    <td>Nitrogeno</td>
+    <td>Potasio</td>
+    <td>Fosforo</td>
+    <td>Fertilidad</td>
+  </tr>
+</table>
+
+Importante su control para <code> <b>regular con giros a la caneca o la adición de algún tipo de residuos </b> </code>que corrija los excesos de humedad y/o temperatura. </p>
+	
+<figure>
+	<img class="image_expand" onclick="openImage(this)" src="images/sensor.png" width="70%">
+	<figcaption style="margin-top:5px"> <b>Sensor con conexión a celular. </b> </figcaption></figure>	
+</div>	
+		
+	<!-- 21 -->
+    <div class="page">
+	<figure>
+	<img class="image_expand" onclick="openImage(this)" src="images/i3.png" width="50%">
+	<figcaption style="margin-top:5px"> <b>Elaborar compost cuida el medio ambiente. </b> </figcaption></figure>	
+	<p> Esta propuesta de elaborar compost en una<code> <b>  caneca giratoria </b> </code> se plantea como una alternativa para<b> facilitar </b> el proceso, para <b>motivar </b>a un mayor número de personas a <b>disponer adecuadamente los residuos orgánicos,</b> para<b> contribuir a generar una cultura de preservación del medio ambiente</b> y a su vez, superar algunas dificultades de los métodos tradicionales de compostaje. Entre otras, se destacan las siguientes ventajas de este<b> modelo de canecas giratorias: </b> </p>
+	<ul> <li> <b>Facilita el volteo de la materia orgánica,</b> pues, a medida que aumenta el volumen se hace más pesado. Girar la caneca es más fácil. </li>
+	<li> <b>Acelera el proceso de descomposición de los residuos orgánicos </b> por una mayor homogenización de la mezcla y el mantenimiento de los rangos ideales de temperatura, según la fase del proceso. </li>
+    <li> <b> Evita los riesgos de contaminación por presencia de cucarachas y roedores </b>de los tradicionales métodos de compostaje.  </li> </ul>
+	</div>
+
+	<!-- 22 -->
+    <div class="page">
+	<div class="interactive" width="819" height="588" 
+src="https://srodriguezrojas939.github.io/proyectocompostela3D/"></div>
+<figcaption>Modelo 3D interactivo </figcaption>
+	<figure>
+<a href="https://sites.google.com/pascualbravo.edu.co/proyecto-compostera/ensamblaje?authuser=0" target="_blank">
+    <img src="images/portadadedocumentos (1).png" width="40%" alt="Tabla de componentes de ensamble" style="display: block; margin: 0 auto;">
+<figcaption>Manual de ensamble y fabricación de la compostera , </a> <p> Has click en la portada para acceder al manual de fabricación y ensamble</p> </figcaption>
+
+
+	
+</figure>
+	</div>
+		
+		<!-- 23 -->
+    <div class="page" style="background-image: url('images/i8.png'); background-size:1280px 560px; background-position:0px 280px; background-repeat: no-repeat;">
+	<h2 id="c17" style="text-align:left">Materia orgánica del suelo</h2>
+	<div class="col_izquierda" style="margin-top:30px;">
+	<p> Está constituida por distintos tipos de residuos orgánicos (de origen vegetal o animal) que se descomponen por la acción de los microorganismos, en condiciones adecuadas de pH, aireación y humedad, y luego, son incorporados al suelo; por ello, previamente se deben conocer las características edafológicas de los suelos a utilizar y como<b> mejorarlos,</b> mediante el empleo del abono orgánico resultado de los procesos de<b> compostaje y lombricultivo.</b><br><br>
+	<p> Identificar la calidad de la materia orgánica de los suelos a cultivar, es uno de los factores más importantes para determinar su productividad, conjuntamente con las características propias de las especies a cultivar; si bien en las regiones tropicales, donde las temperaturas elevadas y la alta humedad, aceleran los procesos, en las zonas templadas también se puede mejorar la calidad de los suelos, en un proceso un <code>poco</code> más lento. 
+	</div>
+	<div class="col_derecha" style="margin-top:30px;">
+	<p> El equilibrio dinámico de sus componentes le da   <code>vida</code> al suelo, porque sirve de alimento a todos los organismos que viven en él, particularmente a los micro-organismos que realizan el proceso de descomposición de los residuos orgánicos, en beneficio de la calidad de los suelos. </p>
+	<p> Con buenos suelos se obtienen buenas cosechas; un buen suelo debe tener los nutrientes <b>“disponibles” </b> para el crecimiento de las plantas, y una estructura que facilite su desarrollo radicular; esta estructura debe tener suficiente porosidad (aire y humedad) para que las raíces de las plantas absorban los nutrientes; además, se deben evitar encharcamientos que pudren las raíces, se logra mediante adecuados sistemas de drenaje.</p>
+	<p> Se considera un <b> “buen suelo”, un suelo fértil,</b> cuando contiene los <code> <b>17 elementos esenciales</code> </b> para el desarrollo de las plantas.
+	</div>
+	</div>
+		
+
+	<!-- 24 -->
+    <div class="page" style="background-image: url('images/i8.png'); background-size:1280px 560px; background-position:-640px 280px; background-repeat: no-repeat;">
+		<br>
+		<figure>
+		<img class="image_expand invertcolor" onclick="openImage(this)" src="images/i7.png" width="110%">
+		<figcaption>Dinámica del proceso de degradación en el compostaje</figcaption></figure>
+		<p><b>Las ventajas comparativas del empleo del abono orgánico </b>frente al tradicional abono química sobresalen por el<b> mejoramiento de las condiciones físico-químicas y biológicas del suelo,</b> que generan las <b> condiciones óptimas para la absorción de los nutrientes </b> presentes en el suelo; condiciones que se mantienen por más largo plazo; contrario al <b>efecto residual de contaminación y degradación del suelo</b> que ocasionan los abonos de síntesis química. </p>
+        </div>
+	
+		
+	<!-- 25 -->
+    <div class="page" style="background:linear-gradient( to bottom right, rgba(200,102,40,0.2), rgba(120,160,200,0)); font-size:99%">
+		<h2 id="c18" style="text-align:left"<b> Fuentes de materia orgánica</b> </h2> </p>
+		<div class="col_izquierda"> <br> </br>
+		<p> <b>Residuos de la preparación de los alimentos </b> (incluye cáscaras de huevo y las canastas desechables, ojalá trituradas), restos de comida, tanto caseros, como de restaurantes y los residuos de la comercialización de frutas y legumbres. </p>
+		<p> Residuos que deben ser separados retirando desechables de un solo uso, bolsas plásticas, colillas de cigarrillos, pañales desechables, toallas higiénicas, vidrios, objetos metálicos y residuos tóxicos y/o peligrosos.   
+		<p> Se consideran igualmente otros tipos de residuos: </p> 
+		<ul> <li> <b>Residuos de la actividad de producción pecuaria:</b> estiércoles, orines y plumas. </li>   
+		<li> <b> Residuos de las actividades agrícola y forestal: </b> restos de cultivos, residuos postcosecha, podas de árboles y arbustos, aserrín, hojas y ramas, etc. </li>
+		</ul>
+		</div>
+		<div class="col_derecha" style="margin-top:32px; text-align:left;">
+		<div class="caja3" style="width: 260px; background-color: rgba(130, 120, 40,0.2); border-radius:12px;  color: var(--p-color)"><p style="text-align: center; margin-top: -10px; color: var(--h2-color)"><b>Descomposición de la Materia orgánica a partir de  residuos orgánicos</b></p>
+		<b>Humificación</b>: Producto de la integración de los procesos físicos, químicos y biológicos que descomponen los residuos orgánicos. <br><br>
+		<b>Humus</b>: Producto de la descomposición de los residuos orgánicos. Compuesto de tipo coloidal que contiene los nutrientes (quelatos ligno-protéicos y minerales) solubles para ser absorbidos por las plantas, en equilibrio dinámico de sus componentes (proporciones ideales) para una mayor productividad.<br><br>
+		<b>Mineralización</b>: Es la transformación del humus en compuestos solubles (iones nitratos, sulfatos y fosfatos), ácidos húmicos y fúlvicos asimilables por las plantas. 
+		</div>
+		</div>
+		</div>
+
+	    <!-- 26 -->
+    <div class="page" style="background:linear-gradient(to bottom left, rgba(200,102,40,0.2), rgba(120,160,200,0));">
+		<br><figure>
+		<img class="image_expand" onclick="openImage(this)" src="images/i9.png" width="90%">
+		<figcaption style="margin-top:5px">Contenedores de residuos por color</figcaption></figure>
+		<p>Haz clic en la siguiente imagen, para abrir un juego de clasificación de residuos.</p>
+		<p style="text-align:center"><img class="image_expand" style="cursor: pointer" onclick="openInteractive('interactivos/residuos/index.html', '1200', '790')" src="images/i10.png" width="83%"></p>
+	    </div>
+	
+	<!-- 27 -->
+    <div class="page">
+	<h2 id="c19"> <b> Variables en los procesos de compostaje </b> </h2>
+		<div class="col_izquierda" style="margin-top:20px;">
+		 <p> <b> La CALIDAD y el TIEMPO </b> de elaboración del compost dependen del adecuado manejo de dos tipos de variables: <b> 1° el equilibrio dinámico</b> entre los tipos de residuos orgánicos. <b>2°  El manejo de las cuatro variables de control. </b> </p>
+		 <p> <b> 1. Variables referidas a la naturaleza y características de los residuos orgánicos: </b> </p>
+		 <p> ● Para un proceso de compostaje eficiente y estable se requiere un <b> equilibrio dinámico </b>entre los tipos de residuos, los residuos <b>ricos en nitrógeno,</b> y los residuos <b>ricos en energía,</b>  </p> 
+		 <p> ● Este equilibrio se da en términos de la relación <b> <code> Carbono/Nitrógeno: (C/N),</code> </b> esta relación es variable, ideal entre 25 y 30 partes de residuos ricos en carbono por 1 parte de nitrógeno:<b> <code> 25-30/1 </code> </b> y depende de los tipos de residuos.</p>
+		 <p> ● El tamaño de las partículas es un factor clave, entre más pequeñas, más efectiva será la acción de descomposición de los microorganismos.  </p>
+		 </ul>
+		  </div>
+		 <div class="col_derecha" style="margin-top:20px;">
+		 <figure>
+		<img class="image_expand" onclick="openImage(this)" src="images/Residuos-secos-y-humedos.jpg" width="90%">
+		<figcaption style="margin-top:5px">Residuos secos y humedos. </figcaption></figure>
+		 <p> Los residuos <b>ricos en nitrógeno, llamados también MATERIALES VERDES o HÚMEDOS </b> tienen como función principal acelerar el proceso de descomposición y se caracterizan por ser frescos, húmedos y de rápida descomposición, los más utilizados son:</p>
+		<p> ●	Restos y cáscaras de frutas y verduras. </p>
+		<p>	●	Restos de vinos, cervezas, café, chocolate, yogur y jugos de frutas.</p>
+		<p> ●   Cáscaras de huevo trituradas. </p>
+		</div>
+		</div>
+	
+	<!-- 28 -->
+    <div class="page">
+	<div class="col_izquierda" style="margin-top:10px;">
+		<p>	●	Ripio o residuos de café. </p>
+		<p>	●	Césped recién cortado y poda de jardín. </p>
+		<p>	●	Restos de alimentos no procesados. </p>
+		<p> Los residuos<b> ricos en energía, llamados también MATERIALES MARRONES o SECOS </b>son los de mayor volumen, regulan la humedad de la mezcla y generan los espacios vacíos para la circulación del aire; además, aportan la energía para la reproducción de los microorganismos, generalmente son secos, leñosos, fibrosos y de más lenta descomposición; los más utilizados son:</p>
+		<p> ●	Hojas secas y ramas pequeñas (cortadas en trozos pequeños).
+		<p> ●	Las bandejas o canastas deshechables de huevos (cortadas lo más pequeño posible). 
+		<p> ●	Papel y cartón troceados sin tinta.
+		<p> ●    Aserrín.	
+		</div>
+		<div class="col_derecha" style="margin-top:10px;">
+		<p> <b> En resumen, se deben depositar <code> dos capas de material marrón por una de material verde.</code> </b>
+		<p> <b> 2.  Variables de control externo: </b> </p> <ul> 
+		 <li> Control de la <b>temperatura,</b> </li>
+		<li> Control de la <b> humedad,</b> </li>
+		<li> Control del <b> pH </b> y </li>
+		<li> Control de los <b>niveles de aireación,</b> osea la disponibilidad de oxígeno. </li> </ul>
+		<p> <b> Temperatura </b> </p>
+		<p>La temperatura es un parámetro básico de control para lograr un compostaje de calidad, su adecuada regulación <code>activa o detiene</code> la actividad microbiológica de los microorganismos benéficos. </p>
+		<figure>
+		<img class="image_expand" onclick="openImage(this)" src="images/Control de temperatura en el compost.webp" width="95%">
+		<figcaption style="margin-top:5px">Control de temperatura en el compost. </figcaption></figure>
+		</div>
+		 </div>
+		
+		<!-- 29 -->
+		<div class="page">
+		<div class="col_izquierda" style="margin-top:10px;"> 
+		<p> El calor generado en las pilas de compostaje se genera por la respiración de los micro-organismos. Además, sus variaciones determinan las <code>cuatro fases</code> de descomposición de los residuos orgánicos.</p>
+		<p>Con el aumento de la temperatura se eliminan microorganismos patógenos y se inactivan las semillas no deseables presentes en los residuos; a temperaturas más altas se incrementa la velocidad de descomposición de la materia orgánica.</p> 
+		<p>La temperatura no debe superar los $70 \degree C$, si ocurre la materia orgánica se<b>  mineraliza, </b> se pierden nutrientes y se alteran los otros parámetros; por ello, cuando no se aumente la temperatura se debe girar la caneca y/o agregar más residuos orgánicos; y si se eleva demasiado se debe regar y girar la caneca. </p>   
+		<p style="text-align-last:justify"> Al tomar el registro de la temperatura, si el <code>calor es tolerable</code> (de $15\degree$ a $40\degree C$.), se infiere que la mezcla está en la <code> <b>fase mesófila</code> (fase 1  </p> 
+		</div>
+		<div class="col_derecha" style="margin-top:10px;">
+		<p>  de calentamiento o fase 3 de enfriamiento); </b> si el <code>calor</code> que se percibe es <code>intolerable</code>, la mezcla puede estar en la<b> fase termofíla.</b> </p>
+		<p> <b> Humedad</b> </p>
+		<p> Entre el 45 y el 60% es el rango ideal de humedad en el compost, para lograr mayor eficiencia de los microorganismos presentes, en sus funciones metabólicas en el proceso de degradación de los residuos orgánicos. </p>
+		<p> La “prueba del puño” es utilizada comúnmente para verificar de forma <code>cualitativa</code>  el porcentaje de humedad en una pila de compost. </p>
+		<p> Haz clic en la siguiente imagen, para apreciar mejor la prueba del puño:</p>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/i16.jpg" width="80%"/>
+		<figcaption style="margin-top:5px">Prueba del puño. </figcaption></figure>
+		</div>	
+		</div>		
+		
+		<!-- 30 -->
+		<div class="page">
+		<div class="col_izquierda" style="margin-top:10px;"> 
+		<p> “si éste es normal, se puede formar una bola con el material sin que se fragmente o se desmorone”.</p>
+		<p> Si está muy húmedo, chorrea; se debe agregar material seco (aserrín, hojarasca, residuos de cocina y de podas), y si por el contario la mezcla está seca, se puede agregar residuos crudos de cocina o regar con agua.  </p>
+		<p style="text-align-last:justify"> El riego debe realizarse por aspersión, nunca a chorro; debe ser preferiblemente agua lluvia, debido a que el agua potable tiene altos contenidos de cloro que afecta a los microorganismos, (en este caso se debe dejar reposar el agua un día). </p>
+		<p> Para mayor exactitud se emplean los higrómetros, sensores de humedad de alta precisión. </p> 
+		<figure>
+		<img class="image_expand" onclick="openImage(this)" src="images/i17.png" width="60%">
+		<figcaption style="margin-top:5px">Higrómetro. </figcaption></figure>
+		</div>
+		<div class="col_derecha" style="margin-top:10px;">
+		<p> El lixiviado recogido puede aplicarse de nuevo a la mezcla. </p>
+		<p> <b> Aireación </b> </p>
+		<figure>
+		<img class="image_expand" onclick="openImage(this)" src="images/3-tips-para-oxigenar-la-compostera.jpg" width="55%">
+		<figcaption style="margin-top:5px"> 3 tips para oxigenar la compostera. </figcaption></figure>
+		<p>El suministro continuo y uniforme de oxígeno mediante el giro de la caneca, potencia los procesos metabólicos de los micro-organismos, osea, acelera la de degradación de la materia orgánica.</p>
+		<p>El nivel de oxígeno debe estar entre el 5% y 10%; en rangos menores se generan pérdidas de Nitrógeno y se retrasa la maduración del compost. </p>
+		</div>
+		</div>
+
+	<!-- 31 -->
+		<div class="page" style="background-image: url('images/i18.png'); background-size:600px 400px; background-position:320px 480px; background-repeat: no-repeat;">
+		<div class="col_izquierda" style="margin-top:10px;"> 
+		<p> Igualmente, al subir la temperatura en la caneca, se incrementa el consumo de oxígeno por parte de los microorganismos, esta situación se controla con giros de la caneca más continuos.</p>
+		<p> <b> pH. </b>  </p>
+		<p style="text-align-last:justify"> El nivel de pH indica si un material es neutro, igual a 7.0, ácido si es menor y básico si es mayor; este rango controla la actividad biológica de los microorganismos en la descomposición de la materia orgánica, por ejemplo, las <code> bacterias evolucionan mejor</code> en rangos entre<code>  6.0 y 7.5,</code> mientras los <code>hongos se desarrollan mejor en rangos entre 5.5 y 6.0.</code> </p>
+		<p> <b>La variedad de los residuos orgánicos </b> a compostar garantiza el pH de la mezcla, asociado a los rangos ideales de temperatura, aireación y humedad. </p>
+		</div>
+		<div class="col_derecha" style="margin-top:10px;">
+		<h2 id="c110"> <b> Fases del compostaje   </b> </h2>
+		<p><b>1. Descomposición mesófila, de calentamiento</b>: Al inicio del proceso de compostaje, con un adecuado porcentaje de humedad, la temperatura en la pila comienza a aumentar hasta los $40\degree$; durante esta fase aparecen dos grupos de bacterias bacillus y thermus, que <code>degradan los azúcares y los aminoácidos</code>. Simultáneamente el pH baja, se torna ácido.</p>
+		<p><b>2. Descomposición termófila</b>: Entre los $40\degree$ y $60\degree$ las bacterias mesófilas se agrupan formando endosporas para protegerse del calor, aparecen otras cepas de bacterias termófilas y hongos que </p> 
+		</div>
+		</div>
+
+    	<!-- 32 -->
+		<div class="page" style="background-image: url('images/i18.png'); background-size:600px 400px; background-position:-320px 480px; background-repeat: no-repeat;">
+		<figure>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/i14.jpg" width="80%"/>
+		<figcaption>Fases del compostaje</figcaption></figure> 
+		<p> descomponen las partes más difíciles de la materia orgánica (celulosas, hemicelulosas y ligninas); en esta fase también mueren los microorganismos patógenos que no soportan estos aumentos de temperatura. El calor generado en el proceso de descomposición disminuye el % de humedad y el pH asciende entre 8 y 9 (se torna básico).</p>
+		</div>
+		
+		<!-- 33 -->
+		<div class="page">
+		<p> Por su importancia les <pageref ref_id="videos1" prefix="página" digits="2"></pageref>  presentamos dos videos y una animación generada desde ese video:</p>
+		<figure>
+		<img class="image_expand" onclick="openImage(this)" src="images/fases2.gif" width="100%">
+		<figcaption style="margin-top:5px">Fases del compostaje en las que la temperatura interviene</figcaption></figure>
+		<p> <b>3. Descomposición mesófila de enfriamiento</b>: Cuando se reducen los residuos ricos en carbón y nitrógeno, los microorganismos disminuyen su actividad, por lo tanto, la temperatura también desciende, cuando esto ocurre las bacterias mesófilas que estaban en forma de endosporas reactivan su trabajo de degradación; en esta etapa el pH desciende cercano al pH neutro.<br><br>
+		<p> <b>4. Maduración: </b> es la etapa final del proceso de elaboración del compost, el compost se enfría, baja la emperatura a niveles del medio ambiente; la materia orgánica se ha descompuesto casi en su totalidad, tanto que ya no lo hará más; los microorganismos, especialmente los hongos sintetizan los carbohidratos más complejos (lignina),  toma un color café oscuro y tiene un olor muy agradable a bosque húmedo. </p>
+		</div>
+	
+	<!-- 34 -->
+    <div class="page">		
+	<div><img src="images/icono1.png" style="float:left; margin-right:15px; width:50px" border="0"/><p id="videos2" style="font-size:24px; color: var(--h2-color)"> Video 1</p></div>
+		<p>A continuación, puedes observar la explicación que nos da Gustavo Adolfo Iguad Eraso, sobre el proceso de compostaje:</p>
+		<div class="interactive" poster="interactivos/posters/p24.png" width="960" height="675" scale="63%" src="interactivos/video2/index.html"></div>
+		<p style="font-size:20px; color:var(--h1-color); text-align: center; margin-top:5px;">Haz clic en la esquina superior derecha para ampliar la escena</p>	
+		 <h2 id="c111"> <b>Nutrientes del compostaje</b> </h2>
+	<p> Además del <code>Oxígeno</code>-O, <code>Hidrógeno</code>-H y <code>Carbono</code>-C en un compost de buena calidad se encuentran 14 nutrientes minerales,  que se clasifican en: </p> <ul>
+	<li> <b>macronutrientes primarios</b>: <code>Nitrógeno</code>-N, <code>Fósforo</code>-P, <code>Potasio</code>-K. </li>
+	<li> <b> micronutrientes primarios</b>: <code>Calcio</code>-Ca, <code>Magnesio</code>-Mg y <code>Azufre</code>-S. </li>
+	<li> <b> micronutrientes esenciales</b>: <code>Boro</code>-B, <code>Cloro</code>-Cl, <code>Cobre</code>-Cu, <code>Hierro</code>-Fe, <code>Manganeso</code>-Mn, <code>Niquel</code>-Ni, <code>Molibdeno</code>-Mo, y <code>Zinc</code>-Zn.</li> 
+	<li> <b>micronutrientes no esenciales</b>: <code>Sodio</code>-Na, <code>Silicio</code>-Si, <code>Cobalto</code>-Co, <code>Selenio</code>-Se y <code>Aluminio</code>-Al. </li>
+	</ul>		
+	</div>
+	
+	<!-- 35 -->
+    <div class="page">	
+	<figure>
+	<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/compost arrow.png" width="105%"/>
+	<figcaption><b> Nutrientes del compost. </b> </figcaption></figure> 	
+	<div><img src="images/icono1.png" style="float:left; margin-right:15px; width:75px" border="0"/><p id="videos3" style="font-size:24px; color: var(--h2-color)"> Video 2</p></div>
+	<p>El suministro de Nitrógeno puede tener problemas, veamos:</p>
+	<div class="interactive" poster="interactivos/posters/p25.png" width="960" scale="75%" height="675" src="interactivos/video3/index.html"></div>
+	</div>
+	
+	<!-- 36 -->
+    <div class="page">	
+		<figure>
+	<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/Todo junto es basura.png" width="85%"/>
+	<figcaption><b> Todo junto es basura. </b> </figcaption></figure> 	
+		<p> El mensaje es <code> <b> CLARO  NO SEPARAR LOS RESIDUOS, los convierte en BASURA.</b> </code> Por ello, lo más importante es desde la fuente,<code> <b> CLASIFICAR Y SEPARAR </code> </b> los RESIDUOS ORGÁNICOS de los demás residuos para <code> <b> COMPOSTARLOS.</code> </b> </p>
+		<p> Para un eficiente proceso de compostaje, se deben <b>SEPARAR Y DISPONER ADECUADAMENTE,  </b> en otros recipientes,<code> <B> NUNCA </b> agregarlos a la CANECA GIRATORIA de compostaje, </code> estos materiales , son entre otros, los siguientes:</p>
+		<ul> <li> Artículos y/o envases metalicos, de vidrio o de pasta.</li>
+		<li> Empaques de celofán y envolturas de snacks y confites.</li>
+		<li> Empaques o embalajes de alimentos con capas de plástico y/o aluminio, ejemplo: envases tetrapack </li>
+		<li> Maderas tratadas con productos químicos. </li>
+		<li> Colillas de cigarrillos. </li>
+		<li> Toallas higiénicas y pañales deshechables.</li>
+		<li> Residuos peligrosos y/o tóxicos.
+		</div>
+	
+	<!-- 37 -->
+    <div class="page">		
+		<h2 id="c112">Elaboración de Compost en CANECAS GIRATORIAS</h2>	
+		<p> Los residuos se depositan  en la CANECA GIRATORIA por <b> capas entre 5 y 10 cms, distribuidas en forma UNIFORME </b> y luego se GIRA.</p>
+		<ul> <li> 1. Una capa de hojas y ramas.</li>
+		<li> 2. Una capa compost o de tierra común. </li>
+		<li> 3. Los restos de comida, cáscaras de verduras y/o frutas. <b> Se debe girar la caneca luego de cada depósito.</b> </li> 
+		<li> 4. Se siguen depositando capas de restos de jardín, de comida o de cáscaras de verduras y/o frutas. <b> Se debe girar la caneca.</b>
+		<li> 5. Si se requiere, regar con agua limpia. <b> Se debe girar la caneca.</b> </li> </ul>
+		<p> <b>Facilita el proceso el corte de los residuos en trozos pequeños. </b> </p> 
+		<figure>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/Capas del compost.png" width="63%"/>
+		<figcaption>Capas del compost</figcaption></figure> 
+		</div>
+		
+		<!-- 38 -->
+    <div class="page">	
+		<h2 id="c113"> <b> Problemas más comunes en el proceso de compostaje y sus alternativas de solución </b> </h2>  
+		
+		<ul><li><b>El compost NO se calienta</b>: La falta de oxígeno reduce la actividad de los micro-organismos aeróbicos. Por ello, SIEMPRE Se debe girar la caneca al agregar los residuos,<B> MÍNIMO tres veces a la semana.</B></li>
+		<li><b>Exceso de humedad</b>: Agregar material seco (cáscaras de frutas y legumbres). Hacer la prueba del puño.</li> 
+		<li><b>Composta muy seca</b>: Agregar agua y girar la caneca. Hacer de nuevo la prueba del puño.</li>
+		<li><b>Malos olores</b>: Girar la caneca con mayor periodicidad para evitar la compactación y así<B> mantener el equilibrio</B> de las bacterias anaeróbicas (responsables del mal olor) con las bacterias aeróbicas, otra medida, agregar material seco.</li>
+		<li><b>Control de insectos, roedores y aves</b>: siempre mantener la ventana de acceso cerrada.</li> 
+		</ul> 
+		<h2 id="c114">Aspectos a tener en cuenta para realizar un proyecto de elaboración de Compost</h2>
+		<p>Al inicio de un proyecto de elaboración de compost se deben considerar los siguientes detalles:</p>
+		<ul class="lista2"><li>Cantidad y calidad de los residuos orgánicos disponibles.  
+		<li>Disponibilidad de espacio, para depositar los residuos orgánicos, revolver el compost (giros o volteos de la caneca) y almacenar adecuadamente el compost terminado. </li> 
+		<li>Disponibilidad de tiempo para realizar oportunamente las actividades del proceso.   </li>
+		<li>Llevar los registros de los controles técnicos del proceso de compostaje.</ul> 
+				</div>
+
+
+	
+		<!-- 39 -->
+    <div class="page">
+		<div class="col_izquierda" style="margin-top:05px;"> 
+		<p> La producción de $CO_2$</b> en el proceso de compostaje,  <b>es de bajo impacto; </b> dada su fijación en el suelo.<code> Es una de las razones de <b>compostar los residuos orgánicos, </b> </code> pues, se <code>contribuye a <b>disminuir</b> sus emisiones contaminantes </code>  en el aire.</p> 
+		<p> Si el compost se emplea en los cultivos sin cumplir las cuatro fases,<code> <b> queda inmaduro </b> </code>, entonces, puede presentar problemas de <code> <b> toxicidad;  </b> </code> el Nitrógeno presente se encuentra como amonio,en lugar de nitrito que es lo ideal. Además, se presenta inestabilidad en los ácidos orgánicos (carboxílicos y sulfónicos) que son tóxicos para las plantas.</p> 		
+		<p> El compost estará listo cuando: </p>
+		<ul> 
+		<p>•	Parece tierra, huele a tierra, es de color marrón oscuro. </p>
+		<p>•	Las partículas son de tamaño minúsculo, no reconocibles, comparado con los residuos originalmente compostados. </p>
+		</ul>
+		</div>
+		<div class="col_derecha" style="margin-top:05px;">
+		<p> El compostaje es un proceso que ocurre de forma natural, generalmente entre 3 o 4 meses, lo que se propone con las <b> CANECAS GIRATORIAS </b> es <code> <b>ACELERAR y FACILITAR </b> </code> el proceso, la propuesta es realizarlo entre 60 y 75 días. </p>
+		<p> El compost sólo tiene <b>cinco</b> ingredientes: carbono, nitrógeno, agua, aire y tiempo, en un equilibrio dinámico; mezclarlos y controlarlos es un APRENDIZAJE contínuo, con la práctica, seguro, <code> <b> FUNCIONARÁ MEJOR. </b> </code> </p>
+		<p> Con esta sencilla acción, estamos contribuyendo a la disminución de los efectos contaminantes del medio ambiente; además, tendremos abono para nuestros jardines y/o cultivos.</p>
+		<figure>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/Mes-del-compostaje.jpg" width="70%"/>
+		<figcaption><b>  Mes del compostaje. </b> </figcaption></figure> 
+		<p> En resumen, se pueden resaltar en el siguiente mensaje los beneficios del compostaje:</p>
+		</div>
+		</div>
+
+	<!-- 40 -->
+		<div class="page">
+		<figure>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/Beneficios de elaborar compost.png" width="90%"/>
+		<figcaption><b> Beneficios de elaborar compost.  </b> </figcaption></figure> 
+		<p> Lógicamente, el<code> <b> MEJOR RESIDUO es el que NO SE GENERA.</b> </CODE> Concuerda con las <code> <b> 3 R: Reusar, reducir y Reciclar.</code> </b> </p>
+		<h2 id="c115"> <b>  Normas de seguridad </b> </h2> 
+		<figure>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/i19.png" width="28%"/>
+		<figcaption><b> Normas de seguridad para primeros auxilios. </b> </figcaption></figure> 
+		<ul> <li>Disponer de un botiquín de primeros auxilios, con los elementos básicos; vendas, gasas, toallas de papel, guantes de látex, desinfectantes, alcohol, bajalenguas y tablillas para inmovilización. Incluya los números telefónicos de emergencia, Policía, Bomberos y servicios de salud y transporte. </li>
+		
+		</div>
+		
+
+
+
+    <!-- 41 -->
+		<div class="page">	
+		<li>Organizar, mantener limpias y/o afiladas las herramientas (carretillas, azadones, tijeras de poda, palas, rastrillos). </li>
+		<li>Mantener suficiente agua potable.  </li>
+		<li>Usar guantes de protección y mascarilla para la manipulación de los ingredientes, en especial de los estiércoles.</li>
+		<li>Usar ropa adecuada de trabajo, botas altas y antideslizantes.</li>  </ul>
+		<p>Diviértete un poco, resolviendo el siguiente puzle. Puedes buscar imágenes desde Flickr o usar las que están guardadas en local. Si lo deseas, puedes ampliar el puzle haciendo clic en el botón de la esquina superior derecha.</p>
+		<div class="interactive" poster="interactivos/posters/p32.png" scale="90%" width="800" height="500" src="interactivos/Puzle/index.html"></div>
+		<ol start="7">	
+		</div>
+
+			<!-- 42 -->
+    <div class="page">
+	<h2 id="c115"> <b>  Lecturas complementarias </b> </h2> 
+	<p> El proyecto cuenta con tres documentos guías para aprender sobre compostaje, operación de la maquina y como se ensambla, a la vez de complementar de una manera mas compacta los temas abordados en este libro iteractivo. A la vez de un sitio web que recopila todo lo relacionado al proyecto. </p>
+	
+	<figure>
+<a href="https://sites.google.com/pascualbravo.edu.co/proyecto-compostera/ensamblaje?authuser=0" target="_blank">
+    <img src="images/portadadedocumentos (1).png" width="40%"  style="display: block; margin: 0 auto;">
+<figcaption>Manual de ensamble y fabricación de la compostera , </a>  </figcaption>
+<figure>
+<a href="https://sites.google.com/pascualbravo.edu.co/proyecto-compostera/formula-de-compostaje?authuser=0" target="_blank">
+    <img src="images/portadadedocumentos (2).png" width="40%"  style="display: block; margin: 0 auto;">
+<figcaption>Fórmula de compostaje </a>  <p> Has click en las portadas para acceder a los documentos complementarios. </p> </figcaption>
+</figure>
+	</div>
+		
+
+		<!-- 43 -->
+    <div class="page">
+<figure>
+<a href="https://sites.google.com/pascualbravo.edu.co/proyecto-compostera/manual-de-uso?authuser=0" target="_blank">
+    <img src="images/portadadedocumentos (3).png" width="50%"  style="display: block; margin: 0 auto;">
+<figcaption>Manual de uso  </a> <p> Has click en la portada para acceder al manual de uso de la compostera y del sensor </p> </figcaption>
+</figure>
+
+<figure>
+<a href="https://sites.google.com/pascualbravo.edu.co/proyecto-compostera/p%C3%A1gina-principal?authuser=0" target="_blank">
+    <img src="images/iconodetalladositioweb.png" width="40%" style="display: block; margin: 0 auto;">
+<figcaption>Sitio web del proyecto  </a> <p> Has click en el icono para acceder al sitio del proyecto </p> </figcaption>
+</figure>
+
+	</div>
+		
+
+	<!-- 44 -->
+		<div class="page">		
+		<h2 id="c116"> <b> Propuesta de LOMBRICULTIVO: </b> </H2>
+		<p> Para un MEJOR EMPLEO del compost se puede  iniciar la explotación de un lombricultivo, es proceso rápido, de aproximadamente de 30 días adicionales, y de MAYOR RENTABILIDAD, las lombrices tienen la capacidad de convertir la materia orgánica compostada en <code> <b> humus de lombriz, EL MEJOR ABONO ORGÁNICO. </b> </code> </p>
+		<figure>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/Humus de lombriz.jpg" width="100%"/>
+		<figcaption><b> Humus de lombriz. </b> </figcaption></figure> 
+		<p> Un lombricultivo también se puede hacer gradualmente, según la disponibilidad de compost; se enriquece la mezcla con los estiércoles de los animales de pastoreo, <b> éstos previamente se dejan secar ( una o dos semanas)</b> y luego, se aplican también por capas; se gira la caneca en cada aplicación para homogenizar la mezcla y se debe esperar <b> mínimo 30 días</b> para dárselas como alimento para las lombrices. </p>
+		<p> El lombricultivo también llamado <code> <b> vermicultivo o vermicompost </b> </code> es la mejor opción para emplear el <code> <b> compost inmaduro </b> </code>, para alimentar las lombrices <code> <b> rojas californianas </b> </code> .
+		</div>
+	
+	<!-- 45 -->
+		<div class="page">	
+		<p> La mayor importancia del humus de lombriz radica en la alta carga microbiana que promueve la formación de enzimas, seudohormonas y compuestos quelados (iones de minerales), estos quelatos de los diferentes minerales facilitan su absorción por parte de las plantas. </p>
+		<figure>
+		<img class="invertcolor" style="cursor: pointer" onclick="openImage(this)" src="images/lombriz.jpg" width="100%"/>
+		<figcaption><b> lombriz. </b> </figcaption></figure> 
+		<p> El humus de lombriz que es la caca de la lombriz, es una “maquina para producir”, pues, excreta un 60% del alimento que consume. Su riqueza mineral se expresa en el contenido nutricional, contiene cuatro veces más nitrógeno, veinticinco veces más fósforo, y dos veces y media más potasio, en comparación con la materia orgánica ingerida. </p>
+		
+		</div>
+	
+	<!-- 46 -->
+		<div class="page">	
+		<p> La lombriz roja californiana es el <code> único animal </code> en el mundo que<b> no padece, ni trasmite ninguna enfermedad,</b> lo cual asegura la inocuidad del humus de lombriz para la salud humana y de los animales domésticos. </p>
+		<div class="flota_d"> <img loading="lazy" style="border-radius: 15px;" class="image_expand" onclick="openImage(this)" src=" images/Lombricultivo en canastas.png"  width= "40%">
+		<figcaption> <b> Lombricultivo en canastas. </b> 
+		</figcaption>
+		</div>
+		<p> Otra característica valiosa de la lombriz es su alta prolificidad, una población de lombrices se duplica cada 45 días, es casi un crecimiento de tipo exponencial; además, se considera altamente productiva, por los subproductos que genera, el humus de lombriz, el lixiviado del  humus de lombriz y la venta del pie de cría. </p>
+		<p> La explotación de un lombricultivo a partir de la elaboración previa de compost es un proceso que se valora en razón de la experiencia, concordante con la disponibilidad de recursos y de tiempo para su atención. </p>
+		<p> En el siguiente módulo se detallará la explotación del vermicultivo en diversas metodologías, propuesta que se puede ampliar en su tamaño a medida que avanza en la elaboración del compost. </p>
+		</div>
+	
+		
+		<!-- 47 -->
+		<div class="page" style="font-size: 93%">
+		<p>Para terminar este capítulo, revisa tus conocimientos jugando a <b> ¿QUIEN QUIERE SER MILLONARIO ? </b> </p>
+		<div class="page" style="background-image: url('images/i22.png'); background-size:640px 640px; background-position:0px 200px; background-repeat: no-repeat;">
+		<div class="interactive" poster="interactivos/posters/p33.png" scale="83%" width="1400" height="950" src="interactivos/millonario/index.html"></div>
+		</div>
+		</div>
+
+	<!-- 48 -->
+		<div class="page" style="font-size: 95%">
+		<p><b>Evaluación</b></p>
+		<div class="interactive" poster="interactivos/posters/p103.png" width="790" height="520" scale="100%" src="interactivos/Seleccion_multiple7b-JS/index.html"> </div>
+		</div>
+
+	
+		<!-- 49 -->
+		<div class="page">
+		<h1 style="font-size:30px" id="biblio">Referencias bibliográficas</h1>
+       
+   
+        <p>1. Alcaldía Mayor de Bogotá. (2014). Guía técnica para el aprovechamiento de residuos orgánicos a través de metodologías de compostaje y lombricultura.  Universidad Nacional de Colombia. Colombia (<a target="_blank" href="https://www.uaesp.gov.co/images/Guia-UAESP_SR.pdf">https://www.uaesp.gov.co/</a>)
+   				
+		<p>2. Centro de Investigación y Desarrollo Tecnológico del Agua. Ciencias de la tierra y del medio ambiente. Libro electrónico.  Universidad de Salamanca (España), <a style="width:50%" target="_blank" href="https://cidta.usal.es/contamin_agua/www1/www1.ceit.es/Asignaturas/Ecologia/Hipertexto/13Residu/131Compost.htm">https://cidta.usal.es/</a>.
+		
+		<p>3. Diario La República. (2015). En Colombia la lombricultura es un negocio aún reducido y que está aún por desarrollarse. AGRONEGOCIOS. Bogotá (<a target="_blank" href="https://www.agronegocios.co/agricultura/lombricultura-un-negocio-que-esta-por-desarrollar-2620901">https://www.agronegocios.co/</a>).
+		
+		<p>4. Escobar Carvajal, A. (2013). Usos potenciales del humus (abono orgánico lixiviado y sólido) en la empresa FERTILOMBRIZ. Trabajo de práctica empresarial.  Corporación Universitaria La Sallista. Caldas-Antioquia (<a style="width:50%" target="_blank" href="docs/USOS_POTENCIALES_HUMUS_ABONO_ORGANICO_LIXIVIADO_SOLIDO_EMPRESA_FERTILOMBRIZ.pdf">Escobar</a>).
+		
+		<p>5. Red Educativa DESCARTES (2022). Compostaje y Lombricultivo. Institución Universitaria Pascual Bravo. Medellín- Colombia
+		
+		<p>6. Rodríguez, E.; Trujillo, Y.A. (2016). Manual de aprovechamiento de residuos para la producción de abono orgánico, a partir de la descomposición por lombriz roja californiana (Eisenia Foetida)</i>.  Universidad Nacional Abierta y a Distancia - UNAD -. Colombia (<a target="_blank" href="https://repository.unad.edu.co/bitstream/handle/10596/8623/1080931805.pdf">https://repository.unad.edu.co/</a>)
+  		
+		<p>7. Rodriguez Rojas Sebastián. Fórmula de compostaje.Proyecto de apropiación social del conocimiento para la gestión ambiental comunitaria. Institución Universitaria Pascual Bravo. 2026.
+		
+		<p>8. Vélez, J. (2021). La agricultura orgánica sólo tiene 1% de hectáreas del total del mercado de alimentos. AGRONEGOCIOS. Bogotá (<a target="_blank" href="https://www.agronegocios.co/agricultura/la-agricultura-organica-solo-tiene-1-de-hectareas-del-total-del-mercado-de-alimentos-3140358">https://www.agronegocios.co/</a>).</p>
+		
+		</div>	    
+	
+	
+	
+	<!-- Créditos imágenes -->	  
+	<div class="page" style="text-align:left">
+	<h1 style="font-size:30px" id="creditos">Créditos imagenes</h1>
+	<p>Portada: <a href="https://www.klipartz.com/es/sticker-png-deaxx" target="_blank">https://www.klipartz.com/es/sticker-png-deaxx</a>.</p> 
+	<p>Portada capítulo 1: <a href='https://www.freepik.com/photos/compost' target="_blank">Compost photo created by freepik - www.freepik.com</a> (https://wordpress.org/openverse/image/f7325f38-1529-4a1f-b62c-e7c05c46435a).</p>
+	<p>Página 11: <a href="https://www.klipartz.com/es/sticker-png-gwrrj" target="_blank">https://www.klipartz.com/es/sticker-png-gwrrj</a>.</p> 
+	<p>Página 13: <a href="https://www.freepik.com/photos/compost" target="_blank">Compost photo created by freepik - www.freepik.com</a>.</p>
+	<p>Página 15: <a href="https://www.klipartz.com/es/sticker-png-txsrk" target="_blank">https://www.klipartz.com/es/sticker-png-txsrk</a>.</p>
+	<p>Páginas 14 y 15: <a href="https://www.klipartz.com/es/sticker-png-tqlyz" target="_blank">https://www.klipartz.com/es/sticker-png-tqlyz</a>.</p>
+	<p>Página 17: <a href="https://www.pexels.com/photo/girl-in-overall-and-hat-watering-garden-7782166/" target="_blank">Photo by RODNAE Productions from Pexels</a>.</p>
+	<p>Página 19: <a href="https://www.klipartz.com/es/sticker-png-ypkob" target="_blank">https://www.klipartz.com/es/sticker-png-ypkob</a>.</p>
+	<p>Página 22: <a href="href='https://www.freepik.com/vectors/caterpillar" target="_blank">Caterpillar vector created by brgfx - www.freepik.com</a>.</p>	
+	<p>Página 26: <a href="https://docplayer.es/docs-images/109/189358280/images/17-0.jpg" target="_blank">https://docplayer.es/</a>.</p>
+	<p>Página 29: <a href="https://www.klipartz.com/es/sticker-png-tuako" target="_blank">https://www.klipartz.com/es/sticker-png-tuako</a>.</p>
+	<p>Página 31: <a href="https://www.klipartz.com/es/sticker-png-rijyr" target="_blank">https://www.klipartz.com/es/sticker-png-rijyr</a>.</p>
+	<p>Página 32: <a href="https://www.klipartz.com/es/sticker-png-tzfxi" target="_blank">https://www.klipartz.com/es/sticker-png-tzfxi</a>.</p>	
+	<p>Página 33: <a href="https://pixabay.com/es/photos/abono-jard%c3%adn-residuos-bio-419261/" target="_blank">https://pixabay.com/es/photos/abono-jard%c3%adn-residuos-bio-419261/</a>.</p>	
+	<p>Página 35: <a href="https://pixabay.com/es/photos/abono-jard%c3%adn-residuos-bio-419259/" target="_blank">https://pixabay.com/es/photos/abono-jard%c3%adn-residuos-bio-419259/</a>.</p>	
+	
+	</div>
+	
+	<!--  -->
+      <div class="page invertcolor" num="" style="background-image: radial-gradient(white, #ecf0f1, #e3e5e7); display:flex; align-items:center; justify-content:center;">
+          <a style="width:50%" target="_blank" href="http://descartes.matem.unam.mx/"><img src="images/general/logo_descartes.svg" width="100%"></a>
+        </div>
+      </div>
+
+    <!-- [cierra] pages_container -->
+    </div>
+  <!-- [cierra] book_container -->
+  </div>
+
+</body>
+</html>
+	

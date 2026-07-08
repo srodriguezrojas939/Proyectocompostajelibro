@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hypertherm Waste Sorting Game</title>
+</head>
+<body>
+<html>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <script src="main.js" defer></script>
+
+    <section class="Score">
+      <h1>Level 1</h1>
+        <h3>Score</h3>
+        <div class id="score">0/5</div>
+        <h6>drag and drop the waste item to the correct bin</h6>
+
+        <section class="next">  
+          <div class="cLeftRight">
+            <span id="fishNum" hidden>0</span>
+            <button onclick="window.location.href='https://codepen.io/Daren/full/OJxqaLv';" disabled="true"   id="cm2Btn2">Next Level</button>
+          </div>
+            
+
+          <html>
+
+  <section class="draggable-elements">
+  <img src="https://cdn.pixabay.com/photo/2015/09/17/16/34/electronic-scrap-944452_960_720.jpg"  class="draggable" alt="EWaste" draggable="true" height="300px" id="ewaste">
+  <img src="https://cdn.pixabay.com/photo/2018/05/15/22/03/banana-peel-3404376_960_720.jpg" class="draggable" alt="banana-peel" draggable="true" height="300px" id="peel">
+  <img src="https://cdn.pixabay.com/photo/2015/01/08/04/18/box-592367_960_720.jpg" class="draggable" alt="can" draggable="true" height="300px" id="can">
+  <img src="https://cdn.pixabay.com/photo/2018/04/05/20/18/styrofoam-3294019_960_720.png" class="draggable" alt="styrofoam" draggable="true" height="300px" id="styrofoam">
+  <img src="https://cdn.pixabay.com/photo/2017/07/01/15/02/packaging-2461743_960_720.jpg" class="draggable" alt="bubblewrap" draggable="true" height="300px" id="bubble-wrap">
+</section>
+
+    
+    <section class="droppable-elements">  
+    <div class="droppable" data-draggable-id="peel" style=background-color:yellow><span>Compost</span></div>
+    <div class="droppable" data-draggable-id="bubble-wrap"style=background-color:aqua><span>Soft and Stretchy Plastic</span></div>
+    <div class="droppable" data-draggable-id="styrofoam"style=background-color:Brown><span>Landfill</span></div>
+    <div class="droppable" data-draggable-id="ewaste"style=background-color:grey><span>E-Waste</span></div>
+    <div class="droppable" data-draggable-id="can"style=background-color:teal><span>Zero-Sort</span></div>
+    </div>
+    <section class="matching-pairs">
+  </section>
+
