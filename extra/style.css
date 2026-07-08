@@ -65,6 +65,9 @@ img {
 li {
   padding: 0 0 0.4em 0;
 }
+li::marker {
+  color: #7A901A;
+}
 
 code, code_math {
   display: inline;
