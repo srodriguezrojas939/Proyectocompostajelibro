@@ -1,0 +1,40 @@
+body {
+  --h1-color: #103F19;
+  --h2-color: #103F19;
+  --h3-color: #103F19;
+  --h4-color: #103F19;
+  --link-text-color: #AAC240;
+  --note-color: #AAC240;
+  --note-text-color: #1e272e;
+  --book-background-color: #FBF4EC;
+  --page_color: #ffffff;
+  --toc-text-color: #103F19;
+  --toc-over-color: #FBF4EC;
+  --toc-number-color: #103F19;
+  --bibliography-color: #103F19;
+  --figcaption-text: #103F19;
+  --popup-bib-info-background: #FBF4EC;
+  --interactive-color: #FBF4EC;
+  --interactive-border-color: #AAC240;
+  --image-border-color: #AAC240;
+}
+
+body.dark {
+  --h1-color: #AAC240;
+  --h2-color: #AAC240;
+  --h3-color: #AAC240;
+  --h4-color: #AAC240;
+  --link-text-color: #AAC240;
+  --note-color: #AAC240;
+  --note-text-color: #d4d4d4;
+  --book-background-color: #1a1a2e;
+  --toc-text-color: #AAC240;
+  --toc-over-color: #16213e;
+  --toc-number-color: #AAC240;
+  --bibliography-color: #AAC240;
+  --figcaption-text: #AAC240;
+  --popup-bib-info-background: #16213e;
+  --interactive-color: #1a1a2e;
+  --interactive-border-color: #AAC240;
+  --image-border-color: #AAC240;
+}

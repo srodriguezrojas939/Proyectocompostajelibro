@@ -4,11 +4,19 @@ body {
 }
 
 .page h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
   color: var(--h1-color);
 }
 .page h2 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
   color: var(--h2-color);
   font-size: 140%;
+}
+.page h3, .page h4, .page h5, .page h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
 }
 a {
   color: var(--link-text-color);
@@ -30,15 +38,24 @@ a {
 }
 
 .image_expand {
-  -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
-  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+  display: block;
+  margin: 0.6em auto;
+  cursor: pointer;
+  border-radius: 14px;
+}
+
+img {
+  border-radius: 14px;
+}
+
+.image_expand.invertcolor, img.invertcolor {
+  border-radius: 14px;
 }
 
 .interactive {
   text-align: center;
   border: 1px solid var(--interactive-border-color);
-  border-radius: 2px;
+  border-radius: 14px;
   background: var(--interactive-color);
 }
 .image_link {
@@ -53,7 +70,7 @@ code, code_math {
   display: inline;
 }
 code, pre, code_math {
-  color: #0097A7;
+  color: #7A901A;
 }
 xmp {
   font-family: 'UbuntuMono', monospace;
@@ -71,7 +88,9 @@ xmp {
   top: 595px;
   left: 57px;
   right: 0px;
-  color: #0089cd;
+  color: var(--h1-color);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
   font-size: 350%;
   text-align: center;
   text-shadow: 1px 2px rgba(0,0,0,0.15);
@@ -82,7 +101,9 @@ xmp {
   right: 0px;
   bottom: 45px;
   text-align: center;
-  color: #0089cd;
+  color: var(--h1-color);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
   font-size: 220%;
   text-shadow: 1px 2px rgba(0,0,0,0.15);
 }
@@ -91,7 +112,9 @@ xmp {
   position: absolute;
   right: var(--page-right-margin);
   top: 200px;
-  color: #0089cd;
+  color: var(--h1-color);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
   font-size: 500%;
   text-shadow: 1px 2px rgba(0,0,0,0.15);
 }
@@ -104,7 +127,9 @@ xmp {
   width: 582px;
   top: 395px;
   height: 170px;
-  color: #0089cd;
+  color: var(--h1-color);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
   font-size: 250%;
   text-shadow: 1px 2px rgba(0,0,0,0.15);
 }
@@ -217,28 +242,30 @@ body.dark #tool_calculadora {
 
 .caja1 {
 	width: 60%;
-	background-color: rgba(50,250,250,0.15);
-    box-shadow: 6px 6px 10px #000;
+	background-color: #FBF4EC;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.2);
     border-radius: 20px;
     padding: 25px;
 	padding-top:15px;
 	padding-bottom:10px;
 	font-size: 22px;
-	color:black;
+	color:#103F19;
     margin-left: auto;
     margin-right: auto;
+    border: 2px solid #AAC240;
 }
 
 .caja2 {
 	width: 80%;
-	background-color: rgba(190,190,190,0.25);
-    box-shadow: 6px 6px 10px #000;
+	background-color: #FBF4EC;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.15);
+    border: 1px solid #AAC240;
     border-radius: 10px;
     padding: 25px;
 	padding-top:15px;
 	padding-bottom:15px;
 	font-size: 22px;
-	color:black;
+	color:#103F19;
     text-align:center;
     margin-left: auto;
     margin-right: auto;
@@ -246,14 +273,14 @@ body.dark #tool_calculadora {
 
 .caja3 {
 	width: 65%;
-	background-color: rgba(250,250,210,1);
+	background-color: #FBF4EC;
     box-shadow: 0px 0px 0px #000;
-    border-top: 20px solid rgba(210,210,170,0.6);
+    border-top: 20px solid #AAC240;
     padding: 30px;
 	padding-top:10px;
 	padding-bottom:10px;
 	font-size: 17px;
-	color:black;
+	color: #103F19;
     margin-left: auto;
     margin-right: auto;
     
@@ -318,26 +345,41 @@ body.dark #tool_calculadora {
   text-shadow: 2px 2px 3px black;
 }
 
-table, th, td {
-	border: 2px solid black;
-	border-collapse: collapse;
-	text-align: left;
-	font-size:15px;
-}
-th, td {
-	padding: 2px 3px 2px 3px;
-}
-
 table {
-	width:100%;
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	font-size: 15px;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 th {
-	background: rgb(79,112,197);
-	color: white;
+	background: #103F19;
+	color: #FBF4EC;
 	text-align: center;
-	vertical-align:middle;
+	vertical-align: middle;
+	padding: 10px 12px;
+	font-weight: 600;
+	font-family: 'Oswald', sans-serif;
+	letter-spacing: 0.5px;
+	border-bottom: 2px solid #7A901A;
 }
-tr:nth-child(even) {background-color: rgba(20,120,240,0.2);}
+td {
+	padding: 8px 12px;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom: 1px solid #e0e0e0;
+}
+tr:last-child td {
+	border-bottom: none;
+}
+tr:nth-child(even) td {
+	background-color: rgba(16,63,25,0.06);
+}
+tr:hover td {
+	background-color: rgba(122,144,26,0.1);
+}
 
 
 	body {
